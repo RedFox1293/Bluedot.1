@@ -23,27 +23,6 @@ import java.lang.reflect.Field;
 
 public class PacketHandler extends ChannelDuplexHandler {
 
-	@Override
-	public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        if (msg instanceof net.minecraft.network.Packet && msg.getClass().getName().endsWith("S08PacketPlayerPosLook") && ToggleNoRotateCommand.norotatetoggled) {
-            EntityPlayerSP player = (Minecraft.getMinecraft()).thePlayer;
-            if (player != null) {
-                ItemStack item = player.getHeldItem();
-                if ((item != null && item.getDisplayName().contains("Hyperion")) || (item != null && item.getDisplayName().contains("Valkyrie")) || || (item != null && item.getDisplayName().contains("Astraea")) || (item != null && item.getDisplayName().contains("Scylla")) || (item != null && item.getDisplayName().contains("Spirit Sceptre")) || (item != null && item.getDisplayName().contains("Midas Staff"))) {
-                    S08PacketPlayerPosLook packet = (S08PacketPlayerPosLook)msg;
-                    Field packetYaw = packet.getClass().getDeclaredField("field_148936_d");
-                    Field packetPitch = packet.getClass().getDeclaredField("field_148937_e");
-                    packetYaw.setAccessible(true);
-                    packetPitch.setAccessible(true);
-                    packetYaw.setFloat(packet, player.rotationYaw);
-                    packetPitch.setFloat(packet, player.rotationPitch);
-                    msg = packet;
-                }
-            }
-		}
-		
-		super.channelRead(ctx, msg);
-	}
 	
 	// Ignore item frames with arrows on sea lanterns
 	@Override
