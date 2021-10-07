@@ -2521,7 +2521,7 @@ public class DankersSkyblockMod {
         if (keyBindings[8].isKeyDown())
             for (int i = 0; i <= 8; i++) {
                 ItemStack item = player.inventory.getStackInSlot(i);
-                if ((item != null && item.getDisplayName().contains("Rogue Sword"))) {
+                if ((item != null && item.getDisplayName().contains("Rogue Sword")) {
                     player.inventory.currentItem = i;
                     mc.playerController.sendUseItem(mc.thePlayer, world, player.inventory.getStackInSlot(i));
                     break;
@@ -2531,7 +2531,7 @@ public class DankersSkyblockMod {
             int[] order = new int[9];
             for (int i = 0; i <= 8; i++) {
                 ItemStack item = player.inventory.getStackInSlot(i);
-                if ((item != null && item.getDisplayName().contains("Axe of the Shredded"))) {
+                if ((item != null && item.getDisplayName().contains("Axe of the Shredded")) {
                     player.inventory.currentItem = i;
                     mc.playerController.sendUseItem(mc.thePlayer, world, player.inventory.getStackInSlot(i));
                 }
@@ -2544,10 +2544,10 @@ public class DankersSkyblockMod {
             int[] order = new int[9];
             for (int i = 0; i <=8; i++) {
                 ItemStack item = player.inventory.getStackInSlot(i);
-                if ((item != null && item.getDisplayName.contains("Daedalus Axe"))) {
+                if ((item != null && item.getDisplayName.contains("Daedalus Axe")) {
                     j = i;
                 }
-                if ((item != null && item.getDisplayName.contains("Giant's Sword"))) {
+                if ((item != null && item.getDisplayName.contains("Giant's Sword")) {
                     player.inventory.currentItem = i;
                     if (mc.onLeftClickEntity(i, mc.thePlayer)) {
                         player.inventory.currentItem = j;
@@ -3050,7 +3050,7 @@ public class DankersSkyblockMod {
 
     // Delay GUI by 1 tick
     @SubscribeEvent
-    public void onRenderTick;(TickEvent.RenderTickEvent event); {
+    public void onRenderTick(TickEvent.RenderTickEvent event) {
         if (guiToOpen != null) {
             Minecraft mc = Minecraft.getMinecraft();
             if (guiToOpen.startsWith("dankergui")) {
@@ -3083,7 +3083,7 @@ public class DankersSkyblockMod {
     }
 
     @SubscribeEvent
-    public void onWorldRender;(RenderWorldLastEvent event); {
+    public void onWorldRender(RenderWorldLastEvent event) {
         if (ToggleCommand.blazeToggled) {
             if (lowestBlaze != null) {
                 BlockPos stringPos = new BlockPos(lowestBlaze.posX, lowestBlaze.posY + 1, lowestBlaze.posZ);
@@ -3109,7 +3109,7 @@ public class DankersSkyblockMod {
     }
 
     @SubscribeEvent
-    public void onInteract;(PlayerInteractEvent event); {
+    public void onInteract(PlayerInteractEvent event) {
         if (Minecraft.getMinecraft().thePlayer != event.entityPlayer) return;
         ItemStack item = event.entityPlayer.getHeldItem();
         if (item == null) return;
@@ -3251,7 +3251,7 @@ public class DankersSkyblockMod {
     }
 
     @SubscribeEvent
-    public void onEntityInteract;(EntityInteractEvent event); {
+    public void onEntityInteract(EntityInteractEvent event) {
         Minecraft mc = Minecraft.getMinecraft();
         if (mc.thePlayer != event.entityPlayer) return;
 
@@ -3267,7 +3267,7 @@ public class DankersSkyblockMod {
     }
 
     @SubscribeEvent
-    public void onKey;(KeyInputEvent event); {
+    public void onKey(KeyInputEvent event) {
         EntityPlayerSP player = Minecraft.getMinecraft().thePlayer;
         Minecraft mc = Minecraft.getMinecraft();
         World world = mc.theWorld;
@@ -3344,7 +3344,7 @@ public class DankersSkyblockMod {
     }
 
     @SubscribeEvent
-    public void onGuiMouseInputPre;(GuiScreenEvent.MouseInputEvent.Pre event); {
+    public void onGuiMouseInputPre(GuiScreenEvent.MouseInputEvent.Pre event) {
         if (Mouse.getEventButton() != 0 && Mouse.getEventButton() != 1 && Mouse.getEventButton() != 2)
             return; // Left click, middle click or right click
         if (!Mouse.getEventButtonState()) return;
@@ -3570,7 +3570,7 @@ public class DankersSkyblockMod {
     }
 
     @SubscribeEvent
-    public void onMouseInputPost;(GuiScreenEvent.MouseInputEvent.Post event); {
+    public void onMouseInputPost(GuiScreenEvent.MouseInputEvent.Post event) {
         if (Mouse.getEventButton() == 0 && event.gui instanceof GuiChat) {
             if (ToggleCommand.chatMaddoxToggled && System.currentTimeMillis() / 1000 - lastMaddoxTime < 10) {
                 Minecraft.getMinecraft().thePlayer.sendChatMessage(lastMaddoxCommand);
@@ -3579,7 +3579,7 @@ public class DankersSkyblockMod {
     }
 
     @SubscribeEvent
-    public void onGuiOpen;(GuiOpenEvent event); {
+    public void onGuiOpen(GuiOpenEvent event) {
         Minecraft mc = Minecraft.getMinecraft();
         GameSettings gameSettings = mc.gameSettings;
         if (event.gui instanceof GuiChest) {
@@ -3626,7 +3626,7 @@ public class DankersSkyblockMod {
     }
 
     @SubscribeEvent
-    public void onGuiRender;(GuiScreenEvent.BackgroundDrawnEvent event); {
+    public void onGuiRender(GuiScreenEvent.BackgroundDrawnEvent event) {
         if (event.gui instanceof GuiChest) {
             GuiChest inventory = (GuiChest) event.gui;
             Container containerChest = inventory.inventorySlots;
@@ -3998,7 +3998,7 @@ public class DankersSkyblockMod {
     }
 
     @SubscribeEvent
-    public void onServerConnect;(ClientConnectedToServerEvent event); {
+    public void onServerConnect(ClientConnectedToServerEvent event) {
         event.manager.channel().pipeline().addBefore("packet_handler", "danker_packet_handler", new PacketHandler());
         System.out.println("Added packet handler to channel pipeline.");
     }
